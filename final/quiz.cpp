@@ -1,12 +1,18 @@
+/*
+ * Author: Alec Guinan
+ * Email: guinana@student.vvc.edu
+ * Purpose: this defines the functions of the quiz class
+ * Filename: quiz.cpp
+ */
 #include"quiz.h"
 #include<fstream>
 #include<string>
 #include<iostream>
-Quiz::Quiz()
+Quiz::Quiz()// default constructor
 {
 }
 
-void Quiz::getquiz(std::string filename)
+void Quiz::getquiz(std::string filename)//gets questions and answers from a file
 {
 	Question b;
 	char delim = ',';
@@ -15,31 +21,32 @@ void Quiz::getquiz(std::string filename)
 	std::ifstream a;
 	a.open(filename.c_str());
 
-	while(getline(a, section, delim))
+	while(getline(a, section, ','))
 	{
 		if(count == 1)
 		{
 			b.setq(section);
 			count ++;
-			delim = '\n';
+			section = "";
 		}
-		else if(count == 2);
+		else 
 		{
 			b.seta(section);
 			count = 1;
 			m_list.push_back(b);
-			delim = ',';
+
+			section = "";
 		}
 	}
 
 }
 
-void Quiz::displayq(int i )
+void Quiz::displayq(int i )// displays a question
 {
 	std::cout << m_list[i].rquest() << ":" << std::endl;
 }
 
-void Quiz::unread()
+void Quiz::unread()// asks questions for the first time
 {
 	std::string answer;
 	for(int i = 0; i < m_list.size(); i++)
@@ -48,31 +55,30 @@ void Quiz::unread()
 		std::cin >>  answer; 
 		if(m_list[i].iscorrect(answer))
 		{
-			m_list[i].sets("correct");
+			m_list[i].sets(1);
 			std::cout << "Correct" << std::endl;
 		}
 		else 
 		{
-			m_list[i].sets("incorrect");
+			m_list[i].sets(0);
 			std::cout << "Incorrect" << std::endl;
 		}
 	}
-			
 }
 
-void Quiz::secondtime()
+void Quiz::secondtime()// asks the incorrect questions again
 {
 	std::string answer;
 	for(int i = 0; i < m_list.size(); i++)
 	{
 
-		if(m_list[i].rstate() == "incorrect")
+		if(m_list[i].rstate() == 0)
 		{
 			displayq(i);
 			getline(std::cin, answer);
 			if(m_list[i].iscorrect(answer))
 			{
-				m_list[i].sets("correct");
+				m_list[i].sets(1);
 				std::cout << "Correct" << std::endl;
 			}
 			else
@@ -81,21 +87,23 @@ void Quiz::secondtime()
 	}
 }
 
-void Quiz::printscore(std::string filename)
+void Quiz::printscore();// out put the name and score to a file
 {
+	std::cin.clear();
+	std::cin.ignore(999999,'\n');
 	int count = 0;
 	std::ofstream a;
 	std::string name;
 	std::cout << "Please Enter your name: ";
+
 	getline(std::cin,name);	
-	filename = filename + "results";
-	a.open(filename.c_str());
+	a.open(name.c_str());
 
 	a << name << std::endl;
 	for ( int i = 0; i < m_list.size(); i++)
 	{
 		a << m_list[i].rquest() << " : " << m_list[i].ranswer() << " : " << m_list[i].rstate() << std::endl;
-		if ( m_list[i].rstate() == "correct" )
+		if ( m_list[i].rstate() == 1 )
 			count ++;
 
 	}
@@ -103,3 +111,5 @@ void Quiz::printscore(std::string filename)
 
 	a << "Score: " << count << "/" << m_list.size() << std::endl;
 }
+
+

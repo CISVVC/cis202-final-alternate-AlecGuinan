@@ -1,9 +1,15 @@
+/*
+ * Author: Alec Guinan
+ * Email: guinana@student.vvc.edu
+ * Filename: main.cpp
+ * purpose: this program allows a student to take a test
+ */
 #include<iostream>
 #include<string>
 
 #include"quiz.h"
 
-std::string getfilename();
+std::string getfilename();// gets the name of the file
 
 int main()
 {
@@ -12,11 +18,11 @@ int main()
 
 	filename = getfilename();
 
-	a.getquiz(filename);
+	a.getquiz(filename);// gets a list of questions and answers from a file
 
-	a.unread();
-	a.secondtime();
-	a.printscore(filename);
+	a.unread();// asks the unread questions
+	a.secondtime();// allows a second chance to answer the questions
+	a.printscore(filename);// prints the student names and scores to a file
 return 0;
 }
 
@@ -25,8 +31,7 @@ std::string getfilename()
 	std::string filename;
 	std::cout << "Please enter the name of the file: ";
 
-	std::cin >> filename;
-
+	getline(std::cin, filename);
 	return filename;
 }
 
