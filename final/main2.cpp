@@ -17,20 +17,21 @@ int main()
 	std::string answer;
 	std::cout << " Would you like to add questions(q) or read score(s): " ;
 	getline(std::cin,answer);
+
 	if(answer == "q")
 	{
 		std::cout <<" enter the name of the file: ";
 		
-		std::cin.clear();
-		std::cin.ignore(999999,'\n');
-		getline(std::cin, filename);
+		std::cin >> filename;
 		getquestion(filename);
 	}
 	else if(answer == "s")
 	{
 		std::cout << "Please enter the file name: ";
 		getline(std::cin,filename);
+		std::cout << filename << std::endl;
 		getscore(filename);
+
 	}
 	return 0;
 
@@ -42,11 +43,15 @@ void getquestion(std::string filename)// adds new questions to a file
 	std::ofstream b;
 
 	b.open(filename.c_str());
+
+	if(b.is_open())
+		std::cout << "This is not the problem"<< std::endl;
 	do 
 	{
 
 		std::cout << "Please enter question: ";
-		getline(std::cin, a);
+
+		std::cin >> a;
 
 
 		b << a << ",";
@@ -55,13 +60,14 @@ void getquestion(std::string filename)// adds new questions to a file
 
 		std::cout << "Please enter answer: " ;
 
-		getline(std::cin,a);
+		std::cin >> a;
 
 		b << a << ","; 
 		a = "";
 
 		std::cout << "Do you want to add more questions? (y/n)";
-		getline(std::cin,a);
+
+		std::cin >> a;
 	}
 	while(a=="y");
 }
