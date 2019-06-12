@@ -23,6 +23,7 @@ class Question
 		int rstate();// returns the state
 		bool iscorrect(std::string answer);// tells if the answer is correct or not
 
+
 	private:
 		std::string m_quest;
 		std::string m_answer;
