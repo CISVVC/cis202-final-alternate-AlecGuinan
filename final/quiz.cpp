@@ -100,7 +100,7 @@ void Quiz::printscore()// out put the name and score to a file
 	getline(std::cin,name);	
 	filename = name + ".txt";
 
-	a.open(name.c_str());
+	a.open(filename.c_str());
 
 	a << name << std::endl;
 	for ( int i = 0; i < m_list.size(); i++)
