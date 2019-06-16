@@ -2,7 +2,7 @@
  * Author: Alec Guinan
  * Email: guinana@student.vvc.edu
  * Filename: main.cpp
- * purpose: this program allows a student to take a test
+ * purpose: this program allows a student to take a test, this should not be compilted with main2.cpp
  */
 #include<iostream>
 #include<string>
@@ -22,7 +22,7 @@ int main()
 
 	a.unread();// asks the unread questions
 	a.secondtime();// allows a second chance to answer the questions
-	a.printscore(filename);// prints the student names and scores to a file
+	a.printscore();// prints the student names and scores to a file
 return 0;
 }
 

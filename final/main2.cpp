@@ -1,7 +1,7 @@
 /*
  * Author: Alec Guinan
  * Email: guinana@student.vvc.edu
- * Purpose: This file allows ssomeone to add new questions and answers and to read back scores, should be compiled with question.h
+ * Purpose: This file allows ssomeone to add new questions and answers and to read back scores, should be compiled with on its own
  * Filename: main2.cpp
  */
 #include<iostream>

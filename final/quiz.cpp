@@ -87,8 +87,9 @@ void Quiz::secondtime()// asks the incorrect questions again
 	}
 }
 
-void Quiz::printscore();// out put the name and score to a file
+void Quiz::printscore()// out put the name and score to a file
 {
+	std::string filename;
 	std::cin.clear();
 	std::cin.ignore(999999,'\n');
 	int count = 0;
@@ -97,6 +98,8 @@ void Quiz::printscore();// out put the name and score to a file
 	std::cout << "Please Enter your name: ";
 
 	getline(std::cin,name);	
+	filename = name + ".txt";
+
 	a.open(name.c_str());
 
 	a << name << std::endl;
